@@ -2,6 +2,12 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="bin-test" path="test">
+		<attributes>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="lib/javafx.base.jar"/>
 	<classpathentry kind="lib" path="lib/javafx.controls.jar"/>
 	<classpathentry kind="lib" path="lib/javafx.fxml.jar"/>

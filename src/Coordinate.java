@@ -6,6 +6,11 @@ public class Coordinate
 
     //~ Constructors ..........................................................
 
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     //~Public  Methods ........................................................
     public int getX() {
         return x;
