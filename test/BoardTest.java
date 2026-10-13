@@ -78,11 +78,11 @@ public class BoardTest {
     }
 
     /**
-     * A null coordinate wraps to the origin.
+     * A null coordinate is returned unchanged.
      */
     @Test
     public void testWrapCoordinateNull() {
-        assertEquals(new Coordinate(0, 0), board.wrapCoordinate(null));
+        assertNull(board.wrapCoordinate(null));
     }
 
     /**

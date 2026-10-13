@@ -1,7 +1,7 @@
 
 
 /**
- * Board - More documentation soon
+ * Board
  * The origin (0, 0) is at the top left corner.
  */
 public class Board
@@ -43,9 +43,21 @@ public class Board
         return true;
     }
 
+    /**
+     * Wraps a coordinate onto this board by taking each component modulo
+     * the board size. The column is reduced with {@code %} columns and the
+     * row with {@code %} rows, then written back onto {@code position}.
+     * A null position is returned unchanged.
+     * Java's remainder keeps the sign of the dividend, so a negative
+     * component stays negative unless it is an exact multiple of the size.
+     *
+     * @param position the coordinate to wrap, or null
+     * @return {@code position} after it has been updated, or null when
+     *         {@code position} is null
+     */
     public Coordinate wrapCoordinate(Coordinate position) {
         if (position == null) {
-            return new Coordinate(0, 0);
+            return null;
         }
 
         int wrappedX = position.getX() % columns;
