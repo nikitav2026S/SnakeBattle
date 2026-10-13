@@ -1,7 +1,7 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Test skeleton for {@link Board}.
@@ -13,7 +13,7 @@ public class BoardTest {
     /**
      * Creates a minimum-size board for each test.
      */
-    @BeforeEach
+    @Before
     public void setUp() {
         board = new Board(3, 3);
     }
