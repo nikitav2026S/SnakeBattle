@@ -2,6 +2,15 @@
 
 Creating a Snake inspired battle game for Project 2.
 
+# Compile and run
+
+From the project folder, compile the game and start it:
+
+```powershell
+javac -d bin src/Coordinate.java src/LinkedChain.java src/Item.java src/Snake.java src/Board.java src/Main.java
+java -cp bin Main
+```
+
 # Reflection
 
 ## What changed from your specification?
