@@ -1,9 +1,53 @@
-public class Item
+/**
+ * Represents a collectible item on the Snake Battle board.
+ * Each item has a position and a point value.
+ */
+public class Item 
 {
-    //~ Fields ................................................................
+    private final Coordinate position;
+    private final int points;
 
-    //~ Constructors ..........................................................
+    /**
+     * Creates an item at the specified position with a point value.
+     *
+     * @param position the coordinate where the item is located
+     * @param points the number of points the item awards
+     * @throws IllegalArgumentException if the position is null
+     *         or the points are not positive
+     */
+    public Item(Coordinate position, int points) 
+    {
+        if (position == null) 
+        {
+            throw new IllegalArgumentException("Position cannot be null");
+        }
 
-    //~Public  Methods ........................................................
+        if (points <= 0) 
+        {
+            throw new IllegalArgumentException("Points must be positive");
+        }
 
+        this.position = position;
+        this.points = points;
+    }
+
+    /**
+     * Returns the position of this item.
+     *
+     * @return the item's coordinate
+     */
+    public Coordinate getPosition() 
+    {
+        return position;
+    }
+
+    /**
+     * Returns the point value of this item.
+     *
+     * @return the number of points the item awards
+     */
+    public int getPoints() 
+    {
+        return points;
+    }
 }
