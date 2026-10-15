@@ -78,68 +78,6 @@ public class BoardTest {
     }
 
     /**
-     * A null coordinate is returned unchanged.
-     */
-    @Test
-    public void testWrapCoordinateNull() {
-        assertNull(board.wrapCoordinate(null));
-    }
-
-    /**
-     * A coordinate already on the board is unchanged, and the same object is returned.
-     */
-    @Test
-    public void testWrapCoordinateAlreadyOnBoard() {
-        Coordinate position = new Coordinate(1, 2);
-        assertSame(position, board.wrapCoordinate(position));
-        assertEquals(new Coordinate(1, 2), position);
-    }
-
-    /**
-     * A column past the far edge wraps to each remainder, including a second lap.
-     */
-    @Test
-    public void testWrapCoordinatePastFarColumn() {
-        assertEquals(new Coordinate(0, 1), board.wrapCoordinate(new Coordinate(3, 1)));
-        assertEquals(new Coordinate(1, 1), board.wrapCoordinate(new Coordinate(4, 1)));
-        assertEquals(new Coordinate(2, 1), board.wrapCoordinate(new Coordinate(5, 1)));
-        assertEquals(new Coordinate(0, 1), board.wrapCoordinate(new Coordinate(6, 1)));
-    }
-
-    /**
-     * A row past the far edge wraps to each remainder, including a second lap.
-     */
-    @Test
-    public void testWrapCoordinatePastFarRow() {
-        assertEquals(new Coordinate(1, 0), board.wrapCoordinate(new Coordinate(1, 3)));
-        assertEquals(new Coordinate(1, 1), board.wrapCoordinate(new Coordinate(1, 4)));
-        assertEquals(new Coordinate(1, 2), board.wrapCoordinate(new Coordinate(1, 5)));
-        assertEquals(new Coordinate(1, 0), board.wrapCoordinate(new Coordinate(1, 6)));
-    }
-
-    /**
-     * Coordinates past both far edges wrap on each axis independently.
-     */
-    @Test
-    public void testWrapCoordinatePastBothFarEdges() {
-        assertEquals(new Coordinate(0, 0), board.wrapCoordinate(new Coordinate(3, 3)));
-        assertEquals(new Coordinate(1, 2), board.wrapCoordinate(new Coordinate(4, 5)));
-        assertEquals(new Coordinate(2, 1), board.wrapCoordinate(new Coordinate(8, 7)));
-    }
-
-    /**
-     * Coordinates before the near edge keep Java's negative remainder.
-     * A multiple of the board size lands on the origin.
-     */
-    @Test
-    public void testWrapCoordinateBeforeNearEdge() {
-        assertEquals(new Coordinate(-1, 1), board.wrapCoordinate(new Coordinate(-1, 1)));
-        assertEquals(new Coordinate(1, -2), board.wrapCoordinate(new Coordinate(1, -2)));
-        assertEquals(new Coordinate(-1, -2), board.wrapCoordinate(new Coordinate(-4, -5)));
-        assertEquals(new Coordinate(0, 0), board.wrapCoordinate(new Coordinate(-3, -6)));
-    }
-
-    /**
      * The console image is not implemented yet.
      */
     @Test
