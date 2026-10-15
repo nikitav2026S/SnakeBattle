@@ -1,8 +1,11 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Labeled;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
  
@@ -11,6 +14,7 @@ import javafx.stage.Stage;
  * It requires specific setup to run properly in eclipse.
  */
 public class Viewmodel extends Application {
+    private Scene primaryScene;
     
     @Override
     public void start(Stage primaryStage) {
@@ -50,32 +54,55 @@ public class Viewmodel extends Application {
 
 
         Scene scene = new Scene(root, 300, 250); // This is the area drawn in the window.
+        primaryScene = scene;
 
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show(); // Must be called for the window to be rendered.
+        System.out.println("INITIAL SCENE STRUCTURE ===============================================");
+        printSceneTree(scene);
+        System.out.println("=======================================================================");
     }
 
     /**
-     * prints a formatted human-readable hierarchy of the scene tree.
+     * Prints a formatted human-readable hierarchy of the scene tree.
      */
-    public void printSceneTree() {
+    public void printSceneTree(Scene scene) {
+        System.out.println("Scene");
+        if (scene.getRoot() != null) {
+            printNode(scene.getRoot(), 1);
+        }
+    }
 
+    private void printNode(Node node, int depth) {
+        String description = node.getClass().getSimpleName();
+        if (node instanceof Labeled labeled) {
+            String text = labeled.getText();
+            if (text != null && !text.isEmpty()) {
+                description += " \"" + text + "\"";
+            }
+        }
+        System.out.println("  ".repeat(depth) + description);
+        if (node instanceof Parent parent) {
+            for (Node child : parent.getChildrenUnmodifiable()) {
+                printNode(child, depth + 1);
+            }
+        }
     }
 
     private void handleUp(ActionEvent event) {
-        System.out.println(event);
+        printSceneTree(primaryScene);
     }
 
     private void handleDown(ActionEvent event) {
-        System.out.println(event);
+        printSceneTree(primaryScene);
     }
 
     private void handleLeft(ActionEvent event) {
-        System.out.println(event);
+        printSceneTree(primaryScene);
     }
 
     private void handleRight(ActionEvent event) {
-        System.out.println(event);
+        printSceneTree(primaryScene);
     }
 }
