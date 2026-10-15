@@ -61,10 +61,10 @@ java -cp bin Main
 | Board          | Isaac          | Author       |
 | BoardTest      | Isaac          | Author       |
 | Item           | Darsh          | Author       |
-| Snake          |                |              |
-| SnakeTest      |                |              |
+| Snake          | Tiffany        | Author       |
+| SnakeTest      | Tiffany        | Author       |
 | LinkedChain    |                |              |
-| Main           |                |              |
+| Main           | Tiffany        | Author       |
 
 
 # Spec link

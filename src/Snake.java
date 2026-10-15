@@ -1,4 +1,3 @@
-
 // -------------------------------------------------------------------------
 /**
  * Represents the player avatar. Stores move history and score of player.
