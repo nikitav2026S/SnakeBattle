@@ -53,7 +53,7 @@ public class Snake
 
     // ----------------------------------------------------------
     /**
-     * adds a new coordinate with input of distance traveled.
+     * adds new coordinates with input of distance traveled.
      * 
      * @param num
      */
@@ -63,23 +63,27 @@ public class Snake
         int x = getHead().getX();
         int y = getHead().getY();
 
-        switch (direction)
+        for (int i = 0; i < num; i++)
         {
-            case (0):
-                y -= num;
-                break;
-            case (1):
-                x += num;
-                break;
-            case (2):
-                y += num;
-                break;
-            case (3):
-                x -= num;
-                break;
+            switch (direction)
+            {
+                case (0):
+                    y--;
+                    break;
+                case (1):
+                    x++;
+                    break;
+                case (2):
+                    y++;
+                    break;
+                case (3):
+                    x--;
+                    break;
+            }
+            Coordinate newHead = new Coordinate(x, y);
+            path.add(newHead);
         }
-        Coordinate newHead = new Coordinate(x, y);
-        path.add(newHead);
+
     }
 
 
