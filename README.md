@@ -54,17 +54,17 @@ java -cp bin Main
 # Attribution
 
 
-| Section        | Team member(s) | Contribution | GenAI    |
-| -------------- | -------------- | ------------ | -------- |
-| Coordinate     | Isaac          | Author       |          |
-| CoordinateTest | Isaac          | Author       |          |
-| Board          | Isaac          | Author       |          |
-| BoardTest      | Isaac          | Author       |          |
-| Item           | Darsh          | Author       |          |
-| Snake          | Tiffany        | Author       | Revised  |
-| SnakeTest      | Tiffany        | Author       | Revised  |
-| LinkedChain    |                |              |          |
-| Main           | Tiffany        | Author       | Revised  |
+| Section        | Team member(s) | Contribution |
+| -------------- | -------------- | ------------ |
+| Coordinate     | Isaac          | Author       |
+| CoordinateTest | Isaac          | Author       |
+| Board          | Isaac          | Author       |
+| BoardTest      | Isaac          | Author       |
+| Item           | Darsh          | Author       |
+| Snake          | Tiffany        | Author       |
+| SnakeTest      | Tiffany        | Author       |
+| LinkedChain    |                |              |
+| Main           | Tiffany        | Author       |
 
 
 # Spec link
