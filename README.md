@@ -49,7 +49,7 @@ java -cp bin Main
 ## Who does what? Which team member owns each remaining item.
 
 - Isaac - Finish board and implement GUI
-- 
+- Darsh - Finish Item
 
 # Attribution
 
@@ -60,7 +60,7 @@ java -cp bin Main
 | CoordinateTest | Isaac          | Author       |
 | Board          | Isaac          | Author       |
 | BoardTest      | Isaac          | Author       |
-| Item           |                |              |
+| Item           | Darsh          | Author       |
 | Snake          |                |              |
 | SnakeTest      |                |              |
 | LinkedChain    |                |              |
