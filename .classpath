@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="lib/jdk.jsobject.jar"/>
 	<classpathentry kind="lib" path="lib/jfx.incubator.input.jar"/>
 	<classpathentry kind="lib" path="lib/jfx.incubator.richtext.jar"/>
+	<classpathentry kind="src" path="/CS2-Support"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -73,7 +73,7 @@ public class Snake
                 x += num;
                 break;
             case (2):
-                y -= num;
+                y += num;
                 break;
             case (3):
                 x -= num;
@@ -151,6 +151,18 @@ public class Snake
                 return true;
         }
         return false;
+    }
+
+
+    // ----------------------------------------------------------
+    /**
+     * returns current direction
+     * 
+     * @return int
+     */
+    public int getDirection()
+    {
+        return direction;
     }
 
 }
