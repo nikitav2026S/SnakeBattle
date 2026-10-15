@@ -1,6 +1,9 @@
 /**
  * A column and row on the board. The origin {@code (0, 0)} is the top-left
  * corner: {@code x} increases to the right and {@code y} increases downward.
+ *
+ * @author itsung30
+ * @version October 11, 2026
  */
 public class Coordinate
 {

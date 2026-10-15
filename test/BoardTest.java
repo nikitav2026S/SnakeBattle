@@ -5,6 +5,9 @@ import org.junit.Test;
 
 /**
  * Test skeleton for {@link Board}.
+ *
+ * @author itsung30
+ * @version October 11, 2026
  */
 public class BoardTest {
 
@@ -23,7 +26,8 @@ public class BoardTest {
      */
     @Test
     public void testConstructorAcceptsMinimumSize() {
-        fail("Not yet implemented");
+        new Board(3, 3);
+        new Board(4, 5);
     }
 
     /**
@@ -31,7 +35,15 @@ public class BoardTest {
      */
     @Test
     public void testConstructorRejectsTooFewRows() {
-        fail("Not yet implemented");
+        int[] tooFewRows = {2, 0, -1};
+        for (int rows : tooFewRows) {
+            try {
+                new Board(rows, 3);
+            }
+            catch (IllegalArgumentException e) {
+                assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
+            }
+        }
     }
 
     /**
@@ -39,7 +51,15 @@ public class BoardTest {
      */
     @Test
     public void testConstructorRejectsTooFewColumns() {
-        fail("Not yet implemented");
+        int[] tooFewColumns = {2, 0, -1};
+        for (int columns : tooFewColumns) {
+            try {
+                new Board(3, columns);
+            }
+            catch (IllegalArgumentException e) {
+                assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
+            }
+        }
     }
 
     /**
