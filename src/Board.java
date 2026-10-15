@@ -3,6 +3,9 @@
 /**
  * Board
  * The origin (0, 0) is at the top left corner.
+ *
+ * @author itsung30
+ * @version October 11, 2026
  */
 public class Board
 {

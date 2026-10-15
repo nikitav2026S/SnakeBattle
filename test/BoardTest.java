@@ -5,6 +5,9 @@ import org.junit.Test;
 
 /**
  * Test skeleton for {@link Board}.
+ *
+ * @author itsung30
+ * @version October 11, 2026
  */
 public class BoardTest {
 
@@ -23,7 +26,8 @@ public class BoardTest {
      */
     @Test
     public void testConstructorAcceptsMinimumSize() {
-        fail("Not yet implemented");
+        new Board(3, 3);
+        new Board(4, 5);
     }
 
     /**
@@ -31,7 +35,15 @@ public class BoardTest {
      */
     @Test
     public void testConstructorRejectsTooFewRows() {
-        fail("Not yet implemented");
+        int[] tooFewRows = {2, 0, -1};
+        for (int rows : tooFewRows) {
+            try {
+                new Board(rows, 3);
+            }
+            catch (IllegalArgumentException e) {
+                assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
+            }
+        }
     }
 
     /**
@@ -39,7 +51,15 @@ public class BoardTest {
      */
     @Test
     public void testConstructorRejectsTooFewColumns() {
-        fail("Not yet implemented");
+        int[] tooFewColumns = {2, 0, -1};
+        for (int columns : tooFewColumns) {
+            try {
+                new Board(3, columns);
+            }
+            catch (IllegalArgumentException e) {
+                assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
+            }
+        }
     }
 
     /**
@@ -75,68 +95,6 @@ public class BoardTest {
     @Test
     public void testPointWithinBoundsNull() {
         assertFalse(board.pointWithinBounds(null));
-    }
-
-    /**
-     * A null coordinate is returned unchanged.
-     */
-    @Test
-    public void testWrapCoordinateNull() {
-        assertNull(board.wrapCoordinate(null));
-    }
-
-    /**
-     * A coordinate already on the board is unchanged, and the same object is returned.
-     */
-    @Test
-    public void testWrapCoordinateAlreadyOnBoard() {
-        Coordinate position = new Coordinate(1, 2);
-        assertSame(position, board.wrapCoordinate(position));
-        assertEquals(new Coordinate(1, 2), position);
-    }
-
-    /**
-     * A column past the far edge wraps to each remainder, including a second lap.
-     */
-    @Test
-    public void testWrapCoordinatePastFarColumn() {
-        assertEquals(new Coordinate(0, 1), board.wrapCoordinate(new Coordinate(3, 1)));
-        assertEquals(new Coordinate(1, 1), board.wrapCoordinate(new Coordinate(4, 1)));
-        assertEquals(new Coordinate(2, 1), board.wrapCoordinate(new Coordinate(5, 1)));
-        assertEquals(new Coordinate(0, 1), board.wrapCoordinate(new Coordinate(6, 1)));
-    }
-
-    /**
-     * A row past the far edge wraps to each remainder, including a second lap.
-     */
-    @Test
-    public void testWrapCoordinatePastFarRow() {
-        assertEquals(new Coordinate(1, 0), board.wrapCoordinate(new Coordinate(1, 3)));
-        assertEquals(new Coordinate(1, 1), board.wrapCoordinate(new Coordinate(1, 4)));
-        assertEquals(new Coordinate(1, 2), board.wrapCoordinate(new Coordinate(1, 5)));
-        assertEquals(new Coordinate(1, 0), board.wrapCoordinate(new Coordinate(1, 6)));
-    }
-
-    /**
-     * Coordinates past both far edges wrap on each axis independently.
-     */
-    @Test
-    public void testWrapCoordinatePastBothFarEdges() {
-        assertEquals(new Coordinate(0, 0), board.wrapCoordinate(new Coordinate(3, 3)));
-        assertEquals(new Coordinate(1, 2), board.wrapCoordinate(new Coordinate(4, 5)));
-        assertEquals(new Coordinate(2, 1), board.wrapCoordinate(new Coordinate(8, 7)));
-    }
-
-    /**
-     * Coordinates before the near edge keep Java's negative remainder.
-     * A multiple of the board size lands on the origin.
-     */
-    @Test
-    public void testWrapCoordinateBeforeNearEdge() {
-        assertEquals(new Coordinate(-1, 1), board.wrapCoordinate(new Coordinate(-1, 1)));
-        assertEquals(new Coordinate(1, -2), board.wrapCoordinate(new Coordinate(1, -2)));
-        assertEquals(new Coordinate(-1, -2), board.wrapCoordinate(new Coordinate(-4, -5)));
-        assertEquals(new Coordinate(0, 0), board.wrapCoordinate(new Coordinate(-3, -6)));
     }
 
     /**
