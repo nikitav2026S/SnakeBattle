@@ -19,8 +19,6 @@ Creating a Snake inspired battle game for Project 2.
 
 ## What doesn't work yet?
 
-- `getBoardImage` is not yet implemented as it requires a concrete implementation of Item.
-
 # Next Steps
 
 ## What is left to finish the MVP?

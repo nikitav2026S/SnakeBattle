@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "SnakeBattle"
+    },
+    {
+      "type": "java",
       "name": "UiTester",
       "request": "launch",
       "mainClass": "UiTester",

@@ -29,6 +29,7 @@ public class Main
             player1 = new Snake(new Coordinate(1, 5), 1);
             player2 = new Snake(new Coordinate(8, 5), 3);
             board = new Board(10, 10);
+            board.setSnakes(player1, player2);
 
             player1Turn = true;
             gameOver = false;
@@ -38,7 +39,7 @@ public class Main
             System.out.println("Collect items to earn points.");
             System.out.println("Avoid the walls and both snakes' paths.");
 
-            board.getBoardImage();
+            board.printBoard();
 
             // Run the current game
             while (!gameOver)
@@ -165,7 +166,7 @@ public class Main
         // validation
         if (isGameOver(player))
         {
-            board.getBoardImage();
+            board.printBoard();
             System.out.println("You hit something! Game over.");
             gameOver = true;
             return;
@@ -194,7 +195,7 @@ public class Main
             }
         }
 
-        board.getBoardImage();
+        board.printBoard();
 
         System.out.println("Player 1 score: " + player1.getPoints());
         System.out.println("Player 2 score: " + player2.getPoints());

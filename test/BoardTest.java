@@ -143,11 +143,4 @@ public class BoardTest {
         assertFalse(board.pointWithinBounds(null));
     }
 
-    /**
-     * The console image is not implemented yet.
-     */
-    @Test
-    public void testGetBoardImageNotImplemented() {
-        fail("Not yet implemented");
-    }
 }
