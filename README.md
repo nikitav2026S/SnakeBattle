@@ -1,4 +1,4 @@
-# SnakeBattle
+# fSnakeBattle
 
 Creating a Snake inspired battle game for Project 2.
 
@@ -19,27 +19,44 @@ Creating a Snake inspired battle game for Project 2.
 
 ## What doesn't work yet?
 
+- The snake has a bug where it updates its chain incorrectly.
+
 # Next Steps
 
 ## What is left to finish the MVP?
 
-- Foo
+- The snake needs to be fixed.
+- The board needs better visuals to represent the game objects.
 
 ## Which stretch goals will you attempt?
 
-- Foo
+- GUI
 
 ## What new tests will you need?
 
-- Foo
+- GUI tests.
+- Tests for ensuring the board prints as excpected.
 
 ## Who does what? Which team member owns each remaining item.
 
-- Foo
+- Isaac - Finish board and implement GUI
+- 
 
 # Attribution
 
-- TODO: make a table here showing attribution
+
+| Section        | Team member(s) | Contribution |
+| -------------- | -------------- | ------------ |
+| Coordinate     | Isaac          | Author       |
+| CoordinateTest | Isaac          | Author       |
+| Board          | Isaac          | Author       |
+| BoardTest      | Isaac          | Author       |
+| Item           |                |              |
+| Snake          |                |              |
+| SnakeTest      |                |              |
+| LinkedChain    |                |              |
+| Main           |                |              |
+
 
 # Spec link
 
