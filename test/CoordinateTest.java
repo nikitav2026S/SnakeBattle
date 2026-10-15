@@ -1,11 +1,15 @@
 import org.junit.Test;
 import org.junit.Before;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
 /**
- * Tests for {@link Coordinate}.
+ * Test skeleton for {@link Coordinate}.
+ *
+ * @author itsung30
+ * @version October 11, 2026
  */
 public class CoordinateTest {
     private Coordinate coordinate;
@@ -20,14 +24,17 @@ public class CoordinateTest {
 
     /**
      * A coordinate equals itself and another coordinate with the same
-     * column and row, and does not equal null or a different position.
+     * column and row. It does not equal null, another type, a different
+     * column, or a different row.
      */
     @Test
     public void testEquals() {
         assertTrue(coordinate.equals(coordinate));
         assertTrue(coordinate.equals(new Coordinate(0, 0)));
         assertFalse(coordinate.equals(null));
-        assertFalse(coordinate.equals(new Coordinate(1, 1)));
+        assertFalse(coordinate.equals(new Object()));
+        assertFalse(coordinate.equals(new Coordinate(1, 0)));
+        assertFalse(coordinate.equals(new Coordinate(0, 1)));
     }
 
     /**
@@ -66,5 +73,17 @@ public class CoordinateTest {
         assertFalse(coordinate.getY() == 5);
         coordinate.setY(5);
         assertTrue(coordinate.getY() == 5);
+    }
+
+    /**
+     * The text form includes the column and the row.
+     */
+    @Test
+    public void testToString() {
+        assertEquals("Coordinate [x=0, y=0]", coordinate.toString());
+
+        coordinate.setX(2);
+        coordinate.setY(3);
+        assertEquals("Coordinate [x=2, y=3]", coordinate.toString());
     }
 }

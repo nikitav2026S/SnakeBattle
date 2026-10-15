@@ -35,14 +35,29 @@ public class BoardTest {
      */
     @Test
     public void testConstructorRejectsTooFewRows() {
-        int[] tooFewRows = {2, 0, -1};
-        for (int rows : tooFewRows) {
-            try {
-                new Board(rows, 3);
-            }
-            catch (IllegalArgumentException e) {
-                assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
-            }
+        try {
+            new Board(2, 3);
+            fail("Expected IllegalArgumentException for " + 2 + " by " + 3);
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
+        }
+
+        try {
+            new Board(0, 3);
+            fail("Expected IllegalArgumentException for " + 0 + " by " + 3);
+        }
+        catch (IllegalArgumentException e1) {
+            assertEquals("Board minimum dimensions must be 3x3.", e1.getMessage());
+        }
+
+        int rows = -1;
+        try {
+            new Board(rows, 3);
+            fail("Expected IllegalArgumentException for " + rows + " by " + 3);
+        }
+        catch (IllegalArgumentException e2) {
+            assertEquals("Board minimum dimensions must be 3x3.", e2.getMessage());
         }
     }
 
@@ -51,14 +66,29 @@ public class BoardTest {
      */
     @Test
     public void testConstructorRejectsTooFewColumns() {
-        int[] tooFewColumns = {2, 0, -1};
-        for (int columns : tooFewColumns) {
-            try {
-                new Board(3, columns);
-            }
-            catch (IllegalArgumentException e) {
-                assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
-            }
+        try {
+            new Board(3, 2);
+            fail("Expected IllegalArgumentException for " + 3 + " by " + 2);
+        }
+        catch (IllegalArgumentException e) {
+            assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
+        }
+
+        try {
+            new Board(3, 0);
+            fail("Expected IllegalArgumentException for " + 3 + " by " + 0);
+        }
+        catch (IllegalArgumentException e1) {
+            assertEquals("Board minimum dimensions must be 3x3.", e1.getMessage());
+        }
+        
+        int columns = -1;
+        try {
+            new Board(3, columns);
+            fail("Expected IllegalArgumentException for " + 3 + " by " + columns);
+        }
+        catch (IllegalArgumentException e2) {
+            assertEquals("Board minimum dimensions must be 3x3.", e2.getMessage());
         }
     }
 
@@ -81,11 +111,27 @@ public class BoardTest {
     }
 
     /**
-     * A coordinate past an edge is out of bounds.
+     * A coordinate past one edge, past both edges, or before the origin is out of bounds.
      */
     @Test
     public void testPointWithinBoundsOutside() {
-        Coordinate testCoordinate = new Coordinate(5, 5);
+        Coordinate testCoordinate = new Coordinate(3, 1);
+        assertFalse(board.pointWithinBounds(testCoordinate));
+
+        testCoordinate.setX(1);
+        testCoordinate.setY(3);
+        assertFalse(board.pointWithinBounds(testCoordinate));
+
+        testCoordinate.setX(5);
+        testCoordinate.setY(5);
+        assertFalse(board.pointWithinBounds(testCoordinate));
+
+        testCoordinate.setX(-1);
+        testCoordinate.setY(1);
+        assertFalse(board.pointWithinBounds(testCoordinate));
+
+        testCoordinate.setX(1);
+        testCoordinate.setY(-1);
         assertFalse(board.pointWithinBounds(testCoordinate));
     }
 
