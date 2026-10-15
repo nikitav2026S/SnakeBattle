@@ -3,6 +3,12 @@
  */
 public class BoardRenderer {
 
+    /**
+     * Private constructor to avoid instancing this static class.
+     */
+    private BoardRenderer() {
+
+    }
 
     /**
      * Returns a formatted string representation of the board.

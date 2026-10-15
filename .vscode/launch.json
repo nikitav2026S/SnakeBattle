@@ -2,6 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": ".NET Core Debugger (attach)",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:dotrush.pickProcess}"
+    },
+    {
+      "type": "java",
+      "name": "Viewmodel",
+      "request": "launch",
+      "mainClass": "Viewmodel",
+      "projectName": "SnakeBattle_c8b67da",
+      "vmArgs": "--module-path lib --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics -Djava.library.path=javafx-bin"
+    },
+    {
       "type": "java",
       "name": "Main",
       "request": "launch",
