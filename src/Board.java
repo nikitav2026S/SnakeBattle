@@ -117,94 +117,19 @@ public class Board
         itemList.remove(item);
     }
 
-
-    /**
-     * Prints this board directly to the console. The origin is the top-left
-     * corner. An empty cell is a period, and an item is shown as its point
-     * value. Player 1's head is {@code A} and the rest of its path is
-     * {@code a}. Player 2's head is {@code B} and the rest of its path is
-     * {@code b}. A snake covers an item on the same cell.
-     */
-    public void printBoard()
-    {
-        char[][] grid = new char[rows][columns];
-        for (int y = 0; y < rows; y++)
-        {
-            for (int x = 0; x < columns; x++)
-            {
-                grid[y][x] = '.';
-            }
-        }
-
-        for (int i = 0; i < itemList.size(); i++)
-        {
-            Item item = itemList.get(i);
-            Coordinate position = item.getPosition();
-            if (!pointWithinBounds(position))
-            {
-                continue;
-            }
-            int x = position.getX();
-            int y = position.getY();
-            if (grid[y][x] == '.')
-            {
-                grid[y][x] = (char)('0' + item.getPoints());
-            }
-        }
-
-        drawSnake(grid, player1, 'A', 'a');
-        drawSnake(grid, player2, 'B', 'b');
-
-        for (int y = 0; y < rows; y++)
-        {
-            for (int x = 0; x < columns; x++)
-            {
-                System.out.print(grid[y][x]);
-                if (x < columns - 1)
-                {
-                    System.out.print(' ');
-                }
-            }
-            System.out.println();
-        }
+    public int getRows() {
+        return rows;
     }
 
-
-    /**
-     * Writes one snake onto the grid. The head is drawn last so it covers
-     * the body, an item, or the other snake.
-     *
-     * @param grid the board being filled
-     * @param snake the snake to draw, or null
-     * @param head the character for the snake's head
-     * @param body the character for the rest of its path
-     */
-    private void drawSnake(char[][] grid, Snake snake, char head, char body)
-    {
-        if (snake == null)
-        {
-            return;
-        }
-
-        LinkedChain<Coordinate> path = snake.getPath();
-        // Iterate through the snake's chain.
-        for (int i = path.size() - 1; i >= 0; i--)
-        {
-            Coordinate position = path.get(i);
-            // Skip points that are beyond bounds.
-            if (!pointWithinBounds(position))
-            {
-                continue;
-            }
-            
-            // If on the first chain of the snake, set the corresponding spot on the grid to
-            // be the head.
-            if (i == 0) {
-                grid[position.getY()][position.getX()] = head;
-            } else {
-                grid[position.getY()][position.getX()] = body;
-            }
-        }
+    public int getColumns() {
+        return columns;
     }
 
+    public Snake getPlayer1() {
+        return player1;
+    }
+
+    public Snake getPlayer2() {
+        return player2;
+    }
 }

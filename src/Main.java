@@ -39,7 +39,7 @@ public class Main
             System.out.println("Collect items to earn points.");
             System.out.println("Avoid the walls and both snakes' paths.");
 
-            board.printBoard();
+            BoardRenderer.printBoard(board);
 
             // Run the current game
             while (!gameOver)
@@ -166,7 +166,7 @@ public class Main
         // validation
         if (isGameOver(player))
         {
-            board.printBoard();
+            BoardRenderer.printBoard(board);
             System.out.println("You hit something! Game over.");
             gameOver = true;
             return;
@@ -195,7 +195,7 @@ public class Main
             }
         }
 
-        board.printBoard();
+        BoardRenderer.printBoard(board);
 
         System.out.println("Player 1 score: " + player1.getPoints());
         System.out.println("Player 2 score: " + player2.getPoints());
