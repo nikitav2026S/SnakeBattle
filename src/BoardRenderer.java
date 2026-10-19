@@ -1,5 +1,3 @@
-import java.util.Vector;
-
 /**
  * Provides a unified interface for displaying the board to the user through either console flush or visual GUI.
  */
@@ -31,7 +29,7 @@ public class BoardRenderer {
 
         for (int i = 0; i < boardItems.size(); i++) {
             Item item = boardItems.get(i);
-            Vector2 position = item.getPosition();
+            Coordinate position = item.getPosition();
             if (!board.pointWithinBounds(position))
             {
                 continue;
@@ -45,7 +43,7 @@ public class BoardRenderer {
         }
 
         drawSnake(board, grid, board.getPlayer1(), 'A', 'a');
-        drawSnake(board, grid, board.getPlayer2(), 'B', 'b');
+        drawSnake(board, grid, board.getPlayer2(), 'A', 'b');
 
         String ret = "";
 
@@ -78,11 +76,11 @@ public class BoardRenderer {
             return;
         }
 
-        LinkedChain<Vector2> path = snake.getPath();
+        LinkedChain<Coordinate> path = snake.getPath();
         // Iterate through the snake's chain.
         for (int i = path.size() - 1; i >= 0; i--)
         {
-            Vector2 position = path.get(i);
+            Coordinate position = path.get(i);
             // Skip points that are beyond bounds.
             if (!board.pointWithinBounds(position))
             {
