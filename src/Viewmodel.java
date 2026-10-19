@@ -9,10 +9,6 @@ import javafx.scene.control.Labeled;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
  
-/**
- * Test to see if JavaFX works in VSCode.
- * It requires specific setup to run properly in eclipse.
- */
 public class Viewmodel extends Application {
     private Scene primaryScene;
     
@@ -22,7 +18,10 @@ public class Viewmodel extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args); // Calling this creates the window and calls Start()
+        // Calling this creates the window and calls Start().
+        // Launch() does not return until the window is closed.
+        // It is preferable to run game setup logic in launch() rather than in main().
+        launch(args);
     }
 
     private void buildGui(Stage primaryStage) {
@@ -59,6 +58,7 @@ public class Viewmodel extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show(); // Must be called for the window to be rendered.
+        System.out.println("DEBUG: ");
         System.out.println("INITIAL SCENE STRUCTURE ===============================================");
         printSceneTree(scene);
         System.out.println("=======================================================================");
