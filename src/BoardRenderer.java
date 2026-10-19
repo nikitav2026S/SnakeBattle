@@ -43,7 +43,7 @@ public class BoardRenderer {
         }
 
         drawSnake(board, grid, board.getPlayer1(), 'A', 'a');
-        drawSnake(board, grid, board.getPlayer2(), 'A', 'b');
+        drawSnake(board, grid, board.getPlayer2(), 'B', 'b');
 
         String ret = "";
 
