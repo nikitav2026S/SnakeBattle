@@ -16,19 +16,34 @@ public class Vector2
     private int x;
     private int y;
 
-    /** One cell toward the top of the board. */
+    /**
+     * Unit direction one cell toward the top of the board: {@code (0, -1)}.
+     * {@code y} increases downward, so moving up decreases the row.
+     */
     public static final Vector2 UP = new Vector2(0, -1);
 
-    /** One cell toward the bottom of the board. */
+    /**
+     * Unit direction one cell toward the bottom of the board: {@code (0, 1)}.
+     * {@code y} increases downward, so moving down increases the row.
+     */
     public static final Vector2 DOWN = new Vector2(0, 1);
 
-    /** One cell toward the left of the board. */
+    /**
+     * Unit direction one cell toward the left of the board: {@code (-1, 0)}.
+     * {@code x} is the column, so moving left decreases it.
+     */
     public static final Vector2 LEFT = new Vector2(-1, 0);
 
-    /** One cell toward the right of the board. */
+    /**
+     * Unit direction one cell toward the right of the board: {@code (1, 0)}.
+     * {@code x} is the column, so moving right increases it.
+     */
     public static final Vector2 RIGHT = new Vector2(1, 0);
 
-    /** The origin, which has no direction. */
+    /**
+     * The zero vector {@code (0, 0)}. As a position it is the origin (column 0,
+     * row 0). As a direction it has no heading and zero length.
+     */
     public static final Vector2 ZERO = new Vector2(0, 0);
 
     //~ Constructors ..........................................................
