@@ -102,7 +102,7 @@ public class Vector2
         if (direction == null || (x == 0 && y == 0)) {
             return false;
         }
-        // If the scalar cross product is 0, we know the two vectors are either parallel
+        // If the cross product is 0, we know the two vectors are either parallel
         // or pointing in opposite directions.
         int cross = x * direction.getY() - y * direction.getX();
         // If the dot product is greater than 0, we know that the two vectors are pointing
