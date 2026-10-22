@@ -10,6 +10,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+/**
+ * JavaFX window for Snake Battle. Two players take turns moving one cell with
+ * the arrow buttons. The center of the window shows the board; the top shows
+ * scores and whose turn it is. Hitting a wall or the other snake ends the
+ * game. Play again starts a new round.
+ * <p>
+ * Run {@link #main(String[])} or {@code GuiGame.bat}. Game setup belongs in
+ * {@link #start(Stage)}, not {@code main}, because {@link #launch(String...)}
+ * does not return until the window is closed.
+ */
 public class GuiGame extends Application {
     private static Snake player1;
     private static Snake player2;
@@ -33,6 +44,13 @@ public class GuiGame extends Application {
         launch(args);
     }
 
+    /**
+     * Initial UI setup; includes adding buttons, windows, and creating and
+     * showing the window.
+     *
+     * @param primaryStage
+     *            the window to fill and show
+     */
     private void buildGui(Stage primaryStage) {
         boardViewGridPane = new GridPane();
         boardViewGridPane.setAlignment(Pos.CENTER);
@@ -87,7 +105,9 @@ public class GuiGame extends Application {
     }
 
     /**
-     * Update the board based on the status of the game.
+     * Update the board based on the status of the game. This must be called
+     * after every update to internal game logic. It is best to do so in the button
+     * event handlers after all game logic has run.
      */
     private void refreshGui() {
         // 🦃
@@ -206,6 +226,10 @@ public class GuiGame extends Application {
 
     }
 
+    /**
+     * Remove items overlapping the active snake's head and add them to the
+     * score.
+     */
     private void consumePickedUpItems() {
         LinkedChain<Item> items = board.getItems();
         for (int i = 0; i < items.size() ; i++) {
@@ -219,26 +243,56 @@ public class GuiGame extends Application {
     }
 
     //#region EVENT HANDLERS
+    /**
+     * Moves the active snake up. Invoked when the up button is clicked.
+     *
+     * @param event
+     *            the button click
+     */
     private void handleUp(ActionEvent event) {
         play(Vector2.UP);
         refreshGui();
     }
 
+    /**
+     * Moves the active snake down. Invoked when the down button is clicked.
+     *
+     * @param event
+     *            the button click
+     */
     private void handleDown(ActionEvent event) {
         play(Vector2.DOWN);
         refreshGui();
     }
 
+    /**
+     * Moves the active snake left. Invoked when the left button is clicked.
+     *
+     * @param event
+     *            the button click
+     */
     private void handleLeft(ActionEvent event) {
         play(Vector2.LEFT);
         refreshGui();
     }
 
+    /**
+     * Moves the active snake right. Invoked when the right button is clicked.
+     *
+     * @param event
+     *            the button click
+     */
     private void handleRight(ActionEvent event) {
         play(Vector2.RIGHT);
         refreshGui();
     }
 
+    /**
+     * Starts a new game. Invoked when the play-again button is clicked.
+     *
+     * @param event
+     *            the button click
+     */
     private void handlePlayAgain(ActionEvent event) {
         setupNewGame();
         refreshGui();
