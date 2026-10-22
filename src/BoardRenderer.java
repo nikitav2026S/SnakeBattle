@@ -11,7 +11,6 @@ public class BoardRenderer {
      * Private constructor to avoid instancing this static class.
      */
     private BoardRenderer() {
-
     }
 
     /**
@@ -79,9 +78,17 @@ public class BoardRenderer {
     }
 
     /**
-     * Updates the passed GridPane's children based on the state of the board
+     * Replaces the children of {@code uiGrid} with one label per board cell.
+     * Empty cells are {@code ⬛}, items are {@code 🍎}, player 1 is
+     * {@code 🐍}/{@code 🟦}, and player 2 is {@code 🐍}/{@code 🟥}. Out-of-bounds
+     * items and snake segments are skipped. Existing children are removed first.
+     *
      * @param uiGrid
+     *            the grid to fill; must not be null
      * @param board
+     *            the board to draw; must not be null
+     * @throws NullPointerException
+     *             if {@code uiGrid} or {@code board} is null
      */
     public static void renderBoardToGridPane(GridPane uiGrid, Board board) {
         // Wipe all old children.
@@ -99,6 +106,18 @@ public class BoardRenderer {
 
     /**
      * Returns a formatted string representation of the board.
+     * <pre>
+     * a a A . .
+     * . 02 . . .
+     * . . . b B
+     * . . . . .
+     * </pre>
+     *
+     * @param board
+     *            the board to format; must not be null
+     * @return the board as a multi-line string
+     * @throws NullPointerException
+     *             if {@code board} is null
      */
     public static String getBoardString(Board board) {
         int boardRows = board.getRows();
@@ -144,9 +163,13 @@ public class BoardRenderer {
     }
 
     /**
-     * Flushes the board to the console.
-     * 
+     * Writes {@link #getBoardString(Board)} to standard output, followed by a
+     * newline.
+     *
      * @param board
+     *            the board to print, cannot must not be null
+     * @throws NullPointerException
+     *             if {@code board} is null
      */
     public static void printBoard(Board board) {
         System.out.println(getBoardString(board));
