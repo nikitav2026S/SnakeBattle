@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-@SuppressWarnings("javadoc")
 public class Main
 {
     private static boolean player1Turn = true;
@@ -26,8 +25,8 @@ public class Main
         while (playAgain.equalsIgnoreCase("Y"))
         {
             // Initialize a new game
-            player1 = new Snake(new Coordinate(1, 5), 1);
-            player2 = new Snake(new Coordinate(8, 5), 3);
+            player1 = new Snake(new Vector2(1, 5), Vector2.RIGHT);
+            player2 = new Snake(new Vector2(8, 5), Vector2.LEFT);
             board = new Board(10, 10);
             board.setSnakes(player1, player2);
 
@@ -90,7 +89,7 @@ public class Main
      * @param point
      * @return boolean
      */
-    public static boolean checkItems(Coordinate point)
+    public static boolean checkItems(Vector2 point)
     {
         Item[] list = new Item[board.getItems().size()];
         list = board.getItems().toArray(list);
@@ -174,11 +173,11 @@ public class Main
 
         // item
         LinkedChain<Item> items = board.getItems();
-        LinkedChain<Coordinate> snakePath = player.getPath();
+        LinkedChain<Vector2> snakePath = player.getPath();
 
         for (int i = 0; i < snakePath.size(); i++)
         {
-            Coordinate point = snakePath.get(i);
+            Vector2 point = snakePath.get(i);
 
             for (int j = 0; j < items.size(); j++)
             {
@@ -262,7 +261,7 @@ public class Main
      */
     public static boolean isGameOver(Snake snake)
     {
-        Coordinate head = snake.getHead();
+        Vector2 head = snake.getHead();
 
         if (head.getX() < 0 || head.getX() > 9 || head.getY() < 0
             || head.getY() > 9)

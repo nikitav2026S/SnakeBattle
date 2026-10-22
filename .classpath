@@ -10,13 +10,13 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/junit-4.13.2.jar"/>
 	<classpathentry kind="lib" path="lib/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="lib/javafx.base.jar"/>
-	<classpathentry kind="lib" path="lib/javafx.controls.jar"/>
-	<classpathentry kind="lib" path="lib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="lib/javafx.graphics.jar"/>
-	<classpathentry kind="lib" path="lib/javafx.media.jar"/>
-	<classpathentry kind="lib" path="lib/javafx.swing.jar"/>
-	<classpathentry kind="lib" path="lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.base.jar" sourcepath="lib/javafx.base-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.controls.jar" sourcepath="lib/javafx.controls-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.fxml.jar" sourcepath="lib/javafx.fxml-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.graphics.jar" sourcepath="lib/javafx.graphics-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.media.jar" sourcepath="lib/javafx.media-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.swing.jar" sourcepath="lib/javafx.swing-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.web.jar" sourcepath="lib/javafx.web-sources.jar"/>
 	<classpathentry kind="lib" path="lib/javafx-swt.jar"/>
 	<classpathentry kind="lib" path="lib/jdk.jsobject.jar"/>
 	<classpathentry kind="lib" path="lib/jfx.incubator.input.jar"/>

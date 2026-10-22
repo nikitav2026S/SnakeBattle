@@ -2,6 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "GuiGame",
+      "request": "launch",
+      "mainClass": "GuiGame",
+      "projectName": "SnakeBattle_c8b67da",
+      "vmArgs": "--module-path lib --add-modules javafx.controls,javafx.fxml --enable-native-access=javafx.graphics -Djava.library.path=javafx-bin"
+    },
+    {
       "name": ".NET Core Debugger (attach)",
       "type": "coreclr",
       "request": "attach",

@@ -4,7 +4,7 @@
  */
 public class Item 
 {
-    private final Coordinate position;
+    private final Vector2 position;
     private final int points;
 
     /**
@@ -15,7 +15,7 @@ public class Item
      * @throws IllegalArgumentException if the position is null
      *         or the points are not positive
      */
-    public Item(Coordinate position, int points) 
+    public Item(Vector2 position, int points) 
     {
         if (position == null) 
         {
@@ -36,7 +36,7 @@ public class Item
      *
      * @return the item's coordinate
      */
-    public Coordinate getPosition() 
+    public Vector2 getPosition() 
     {
         return position;
     }

@@ -4,8 +4,8 @@
  */
 public class Snake
 {
-    private LinkedChain<Coordinate> path;
-    private int direction;
+    private LinkedChain<Vector2> path;
+    private Vector2 direction;
     private int points;
 
     // ----------------------------------------------------------
@@ -15,9 +15,9 @@ public class Snake
      * @param point
      * @param startDirection
      */
-    public Snake(Coordinate point, int startDirection)
+    public Snake(Vector2 point, Vector2 startDirection)
     {
-        path = new LinkedChain<Coordinate>();
+        path = new LinkedChain<Vector2>();
         path.add(point);
         direction = startDirection;
         points = 0;
@@ -30,14 +30,7 @@ public class Snake
      */
     public void turnLeft()
     {
-        if (direction == 0)
-        {
-            direction = 3;
-        }
-        else
-        {
-            direction = (direction - 1) % 4;
-        }
+        direction = direction.turnLeft();
     }
 
 
@@ -47,41 +40,26 @@ public class Snake
      */
     public void turnRight()
     {
-        direction = (direction + 1) % 4;
+        direction = direction.turnRight();
     }
 
 
     // ----------------------------------------------------------
     /**
-     * adds new coordinates with input of distance traveled.
+     * adds new Vector2s with input of distance traveled.
      * 
      * @param num
      */
-    @SuppressWarnings("incomplete-switch")
     public void move(int num)
     {
-        int x = getHead().getX();
-        int y = getHead().getY();
+        Vector2 head = getHead();
 
         for (int i = 0; i < num; i++)
         {
-            switch (direction)
-            {
-                case (0):
-                    y--;
-                    break;
-                case (1):
-                    x++;
-                    break;
-                case (2):
-                    y++;
-                    break;
-                case (3):
-                    x--;
-                    break;
-            }
-            Coordinate newHead = new Coordinate(x, y);
-            path.add(newHead);
+            // Move the snake in the direction it is facing by adding its
+            // direction to its position.
+            head = head.add(direction);
+            path.add(head);
         }
 
     }
@@ -91,9 +69,9 @@ public class Snake
     /**
      * returns the head of snake.
      * 
-     * @return Coordinate
+     * @return Vector2
      */
-    public Coordinate getHead()
+    public Vector2 getHead()
     {
         return path.get(0);
     }
@@ -105,7 +83,7 @@ public class Snake
      * 
      * @return LinkedChain<Coordinate>
      */
-    public LinkedChain<Coordinate> getPath()
+    public LinkedChain<Vector2> getPath()
     {
         return path;
     }
@@ -142,7 +120,7 @@ public class Snake
      * @param point
      * @return boolean
      */
-    public boolean contains(Coordinate point)
+    public boolean contains(Vector2 point)
     {
         if (point == null)
         {
@@ -161,9 +139,9 @@ public class Snake
     /**
      * returns current direction
      * 
-     * @return int
+     * @return Vector2
      */
-    public int getDirection()
+    public Vector2 getDirection()
     {
         return direction;
     }

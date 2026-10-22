@@ -1,7 +1,21 @@
 {
     "java.project.sourcePaths": ["src", "test"],
     "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-      "lib/**/*.jar"
-    ]
+    "java.project.referencedLibraries": {
+      "include": [
+        "lib/**/*.jar"
+      ],
+      "exclude": [
+        "lib/**/*-sources.jar"
+      ],
+      "sources": {
+        "lib/javafx.base.jar": "lib/javafx.base-sources.jar",
+        "lib/javafx.controls.jar": "lib/javafx.controls-sources.jar",
+        "lib/javafx.fxml.jar": "lib/javafx.fxml-sources.jar",
+        "lib/javafx.graphics.jar": "lib/javafx.graphics-sources.jar",
+        "lib/javafx.media.jar": "lib/javafx.media-sources.jar",
+        "lib/javafx.swing.jar": "lib/javafx.swing-sources.jar",
+        "lib/javafx.web.jar": "lib/javafx.web-sources.jar"
+      }
+    }
   }
