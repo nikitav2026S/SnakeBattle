@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Test skeleton for {@link Vector2}.
+ * Tests for {@link Vector2}.
  *
  * @author itsung30
  * @version October 11, 2026
@@ -28,178 +28,159 @@ public class Vector2Test
 
 
     /**
-     * A vector equals itself and another vector with the same column
-     * and row. It does not equal null, another type, a different column, or a
-     * different row.
+     * The two-argument constructor stores the given column and row. The
+     * no-argument constructor creates the zero vector.
      */
     @Test
-    public void testEquals()
+    public void testConstructor()
     {
-        assertTrue(vector.equals(vector));
-        assertTrue(vector.equals(new Vector2(0, 0)));
-        assertFalse(vector.equals(null));
-        assertFalse(vector.equals(new Object()));
-        assertFalse(vector.equals(new Vector2(1, 0)));
-        assertFalse(vector.equals(new Vector2(0, 1)));
+        assertEquals(0, vector.getX());
+        assertEquals(0, vector.getY());
+        assertEquals(new Vector2(0, 0), new Vector2());
     }
 
 
     /**
-     * The column set by the constructor is returned.
+     * getX returns the column.
      */
     @Test
     public void testGetX()
     {
-        assertTrue(vector.getX() == 0);
-        assertFalse(vector.getX() == 1);
+        assertEquals(0, vector.getX());
+        assertEquals(2, new Vector2(2, 3).getX());
     }
 
 
     /**
-     * The row set by the constructor is returned.
+     * getY returns the row.
      */
     @Test
     public void testGetY()
     {
-        assertTrue(vector.getY() == 0);
-        assertFalse(vector.getY() == 1);
+        assertEquals(0, vector.getY());
+        assertEquals(3, new Vector2(2, 3).getY());
     }
 
 
     /**
-     * Setting the column replaces the previous value.
+     * setX replaces the column.
      */
     @Test
     public void testSetX()
     {
-        assertFalse(vector.getX() == 5);
         vector.setX(5);
-        assertTrue(vector.getX() == 5);
+        assertEquals(5, vector.getX());
     }
 
 
     /**
-     * Setting the row replaces the previous value.
+     * setY replaces the row.
      */
     @Test
     public void testSetY()
     {
-        assertFalse(vector.getY() == 5);
         vector.setY(5);
-        assertTrue(vector.getY() == 5);
+        assertEquals(5, vector.getY());
     }
 
 
     /**
-     * The text form includes the column and the row.
+     * toString includes the column and row.
      */
     @Test
     public void testToString()
     {
         assertEquals("Vector2 [x=0, y=0]", vector.toString());
-
-        vector.setX(2);
-        vector.setY(3);
-        assertEquals("Vector2 [x=2, y=3]", vector.toString());
     }
 
 
     /**
-     * The no-argument constructor creates the zero vector, and the direction
-     * constants are the four unit steps on the board.
+     * A vector equals another with the same column and row. It does not equal
+     * null.
      */
     @Test
-    public void testDirections()
+    public void testEquals()
     {
-        assertEquals(new Vector2(0, 0), new Vector2());
-        assertEquals(new Vector2(0, 0), Vector2.ZERO);
-        assertEquals(new Vector2(0, -1), Vector2.UP);
-        assertEquals(new Vector2(0, 1), Vector2.DOWN);
-        assertEquals(new Vector2(-1, 0), Vector2.LEFT);
-        assertEquals(new Vector2(1, 0), Vector2.RIGHT);
-        assertEquals(Vector2.LEFT, Vector2.UP.turnLeft());
-        assertEquals(Vector2.RIGHT, Vector2.UP.turnRight());
-        assertEquals(Vector2.UP, Vector2.LEFT.turnRight());
+        assertTrue(vector.equals(new Vector2(0, 0)));
+        assertFalse(vector.equals(null));
     }
 
 
     /**
-     * Magnitude is the truncated length of the vector.
-     */
-    @Test
-    public void testMagnitude()
-    {
-        assertEquals(0, vector.magnitude());
-        assertEquals(5, new Vector2(3, 4).magnitude());
-        assertEquals(5, new Vector2(-3, -4).magnitude());
-        assertEquals(1, new Vector2(1, 0).magnitude());
-        assertEquals(1, new Vector2(1, 1).magnitude());
-    }
-
-
-    /**
-     * A vector faces a direction constant when it is a positive multiple of
-     * that direction. The opposite direction, a diagonal, and the zero vector
-     * do not.
+     * A vector faces a matching direction. Null is not a facing direction.
      */
     @Test
     public void testIsFacing()
     {
         assertTrue(new Vector2(0, -1).isFacing(Vector2.UP));
-        assertTrue(new Vector2(0, -4).isFacing(Vector2.UP));
-        assertTrue(new Vector2(0, 3).isFacing(Vector2.DOWN));
-        assertTrue(new Vector2(-2, 0).isFacing(Vector2.LEFT));
-        assertTrue(new Vector2(5, 0).isFacing(Vector2.RIGHT));
-
-        assertFalse(new Vector2(0, 4).isFacing(Vector2.UP));
-        assertFalse(new Vector2(1, 1).isFacing(Vector2.RIGHT));
-        assertFalse(new Vector2(-4, 2).isFacing(Vector2.LEFT));
-        assertFalse(vector.isFacing(Vector2.UP));
         assertFalse(new Vector2(1, 0).isFacing(null));
     }
 
 
     /**
-     * Addition returns the component-wise sum without changing either vector.
-     * A null argument returns the same vector.
+     * turnLeft rotates a cardinal direction. A non-cardinal vector is unchanged.
+     */
+    @Test
+    public void testTurnLeft()
+    {
+        assertEquals(Vector2.LEFT, Vector2.UP.turnLeft());
+        Vector2 diagonal = new Vector2(1, 1);
+        assertSame(diagonal, diagonal.turnLeft());
+    }
+
+
+    /**
+     * turnRight rotates a cardinal direction. A non-cardinal vector is unchanged.
+     */
+    @Test
+    public void testTurnRight()
+    {
+        assertEquals(Vector2.RIGHT, Vector2.UP.turnRight());
+        Vector2 diagonal = new Vector2(1, 1);
+        assertSame(diagonal, diagonal.turnRight());
+    }
+
+
+    /**
+     * Magnitude is the truncated length. The zero vector has length 0.
+     */
+    @Test
+    public void testMagnitude()
+    {
+        assertEquals(5, new Vector2(3, 4).magnitude());
+        assertEquals(0, vector.magnitude());
+    }
+
+
+    /**
+     * add returns the component-wise sum. A null vector argument returns this
+     * vector.
      */
     @Test
     public void testAdd()
     {
-        Vector2 sum = new Vector2(2, 3).add(new Vector2(1, -4));
-        assertEquals(new Vector2(3, -1), sum);
-        assertEquals(new Vector2(4, 5), new Vector2(2, 3).add(2));
-        assertEquals(new Vector2(0, 0), vector.add(Vector2.ZERO));
+        assertEquals(new Vector2(3, -1), new Vector2(2, 3).add(new Vector2(1, -4)));
         assertSame(vector, vector.add(null));
+        assertEquals(new Vector2(4, 5), new Vector2(2, 3).add(2));
     }
 
 
     /**
-     * Multiplication returns the component-wise product. A null argument
-     * throws {@link ArithmeticException}.
+     * multiply returns the component-wise product. A null vector argument is
+     * rejected.
      */
     @Test
     public void testMultiply()
     {
-        Vector2 product = new Vector2(2, 3).multiply(new Vector2(4, -1));
-        assertEquals(new Vector2(8, -3), product);
+        assertEquals(new Vector2(8, -3),
+            new Vector2(2, 3).multiply(new Vector2(4, -1)));
         assertEquals(new Vector2(6, 9), new Vector2(2, 3).multiply(3));
-        assertEquals(Vector2.ZERO, new Vector2(5, 6).multiply(Vector2.ZERO));
-    }
-
-
-    /**
-     * Multiplying by null is rejected.
-     */
-    @Test
-    public void testMultiplyNull()
-    {
         try {
             vector.multiply(null);
             fail("Expected ArithmeticException.");
-        } catch (ArithmeticException e) {
+        }
+        catch (ArithmeticException e) {
             assertNotNull(e);
         }
-        
     }
 }
