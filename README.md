@@ -4,12 +4,10 @@ Creating a Snake inspired battle game for Project 2.
 
 # Compile and run
 
-From the project folder, compile the game and start it:
+`java` and `javac` must be on your PATH. From the project folder, double-click a batch file (or run it in a terminal). Each one compiles `src` and starts the game.
 
-```powershell
-javac -d bin src/Coordinate.java src/LinkedChain.java src/Item.java src/Snake.java src/Board.java src/Main.java
-java -cp bin Main
-```
+- **Console game:** `Main.bat`
+- **GUI game:** `GuiGame.bat`
 
 # Reflection
 
