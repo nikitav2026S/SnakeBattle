@@ -1,11 +1,15 @@
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 /**
  * Provides a unified interface for displaying the board to the user through
  * either console flush or visual GUI.
  */
 public class BoardRenderer {
+
+    private static final Font EMOJI_FONT = Font.font("Segoe UI Emoji", 20);
 
     /**
      * Private constructor to avoid instancing this static class.
@@ -26,7 +30,10 @@ public class BoardRenderer {
         // Fill the label matrix with new label objects.
         for (int y = 0; y < boardRows; y++) {
             for (int x = 0; x < boardCols; x++) {
-                cells[y][x] = new Label();
+                Label label = new Label();
+                label.setFont(EMOJI_FONT);
+                label.setAlignment(Pos.CENTER);
+                cells[y][x] = label;
             }
         }
 
