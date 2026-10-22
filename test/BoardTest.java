@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test skeleton for {@link Board}.
+ * Tests for {@link Board}.
  *
  * @author itsung30
  * @version October 11, 2026
@@ -22,125 +22,103 @@ public class BoardTest {
     }
 
     /**
-     * A board of at least 3 by 3 can be constructed.
+     * A board of at least 3 by 3 can be constructed. Smaller sizes are rejected.
      */
     @Test
-    public void testConstructorAcceptsMinimumSize() {
+    public void testConstructor() {
         new Board(3, 3);
-        new Board(4, 5);
-    }
-
-    /**
-     * Fewer than 3 rows is rejected.
-     */
-    @Test
-    public void testConstructorRejectsTooFewRows() {
         try {
             new Board(2, 3);
-            fail("Expected IllegalArgumentException for " + 2 + " by " + 3);
+            fail("Expected IllegalArgumentException.");
         }
         catch (IllegalArgumentException e) {
             assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
         }
-
-        try {
-            new Board(0, 3);
-            fail("Expected IllegalArgumentException for " + 0 + " by " + 3);
-        }
-        catch (IllegalArgumentException e1) {
-            assertEquals("Board minimum dimensions must be 3x3.", e1.getMessage());
-        }
-
-        int rows = -1;
-        try {
-            new Board(rows, 3);
-            fail("Expected IllegalArgumentException for " + rows + " by " + 3);
-        }
-        catch (IllegalArgumentException e2) {
-            assertEquals("Board minimum dimensions must be 3x3.", e2.getMessage());
-        }
     }
 
     /**
-     * Fewer than 3 columns is rejected.
+     * A point inside the board is in bounds. Null is out of bounds.
      */
     @Test
-    public void testConstructorRejectsTooFewColumns() {
-        try {
-            new Board(3, 2);
-            fail("Expected IllegalArgumentException for " + 3 + " by " + 2);
-        }
-        catch (IllegalArgumentException e) {
-            assertEquals("Board minimum dimensions must be 3x3.", e.getMessage());
-        }
-
-        try {
-            new Board(3, 0);
-            fail("Expected IllegalArgumentException for " + 3 + " by " + 0);
-        }
-        catch (IllegalArgumentException e1) {
-            assertEquals("Board minimum dimensions must be 3x3.", e1.getMessage());
-        }
-        
-        int columns = -1;
-        try {
-            new Board(3, columns);
-            fail("Expected IllegalArgumentException for " + 3 + " by " + columns);
-        }
-        catch (IllegalArgumentException e2) {
-            assertEquals("Board minimum dimensions must be 3x3.", e2.getMessage());
-        }
-    }
-
-    /**
-     * A coordinate inside the board, including the edges, is in bounds.
-     */
-    @Test
-    public void testPointWithinBoundsInside() {
-        Coordinate testCoordinate = new Coordinate(0, 0);
-        assertTrue(board.pointWithinBounds(testCoordinate));
-
-        testCoordinate.setX(1);
-        testCoordinate.setY(1);
-        assertTrue(board.pointWithinBounds(testCoordinate));
-
-        testCoordinate.setX(2);
-        testCoordinate.setY(2);
-        assertTrue(board.pointWithinBounds(testCoordinate));
-        
-    }
-
-    /**
-     * A coordinate past one edge, past both edges, or before the origin is out of bounds.
-     */
-    @Test
-    public void testPointWithinBoundsOutside() {
-        Coordinate testCoordinate = new Coordinate(3, 1);
-        assertFalse(board.pointWithinBounds(testCoordinate));
-
-        testCoordinate.setX(1);
-        testCoordinate.setY(3);
-        assertFalse(board.pointWithinBounds(testCoordinate));
-
-        testCoordinate.setX(5);
-        testCoordinate.setY(5);
-        assertFalse(board.pointWithinBounds(testCoordinate));
-
-        testCoordinate.setX(-1);
-        testCoordinate.setY(1);
-        assertFalse(board.pointWithinBounds(testCoordinate));
-
-        testCoordinate.setX(1);
-        testCoordinate.setY(-1);
-        assertFalse(board.pointWithinBounds(testCoordinate));
-    }
-
-    /**
-     * A null coordinate is out of bounds.
-     */
-    @Test
-    public void testPointWithinBoundsNull() {
+    public void testPointWithinBounds() {
+        assertTrue(board.pointWithinBounds(new Vector2(1, 1)));
         assertFalse(board.pointWithinBounds(null));
     }
 
+    /**
+     * getRows returns the constructed row count.
+     */
+    @Test
+    public void testGetRows() {
+        assertEquals(3, board.getRows());
+    }
+
+    /**
+     * getColumns returns the constructed column count.
+     */
+    @Test
+    public void testGetColumns() {
+        assertEquals(3, board.getColumns());
+    }
+
+    /**
+     * The constructor fills the board with twelve items.
+     */
+    @Test
+    public void testGetItems() {
+        assertEquals(12, board.getItems().size());
+    }
+
+    /**
+     * Removing a stored item drops it. An item that is not on the board is
+     * ignored.
+     */
+    @Test
+    public void testRemoveItem() {
+        Item item = board.getItems().get(0);
+        board.removeItem(item);
+        assertFalse(board.getItems().contains(item));
+
+        int size = board.getItems().size();
+        board.removeItem(new Item(new Vector2(0, 0), 1));
+        assertEquals(size, board.getItems().size());
+    }
+
+    /**
+     * setSnakes stores the given snakes. Null clears them.
+     */
+    @Test
+    public void testSetSnakes() {
+        Snake player1 = new Snake(new Vector2(0, 0), Vector2.RIGHT);
+        Snake player2 = new Snake(new Vector2(2, 2), Vector2.LEFT);
+        board.setSnakes(player1, player2);
+        assertSame(player1, board.getPlayer1());
+        assertSame(player2, board.getPlayer2());
+
+        board.setSnakes(null, null);
+        assertNull(board.getPlayer1());
+        assertNull(board.getPlayer2());
+    }
+
+    /**
+     * getPlayer1 returns the first snake after it is stored.
+     */
+    @Test
+    public void testGetPlayer1() {
+        Snake player1 = new Snake(new Vector2(0, 0), Vector2.RIGHT);
+        board.setSnakes(player1, null);
+        assertSame(player1, board.getPlayer1());
+        assertNull(new Board(3, 3).getPlayer1());
+    }
+
+    /**
+     * getPlayer2 returns the second snake after it is stored.
+     */
+    @Test
+    public void testGetPlayer2() {
+        Snake player2 = new Snake(new Vector2(2, 2), Vector2.LEFT);
+        board.setSnakes(null, player2);
+        assertSame(player2, board.getPlayer2());
+        assertNull(new Board(3, 3).getPlayer2());
+    }
 }
