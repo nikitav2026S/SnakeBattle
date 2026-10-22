@@ -2,6 +2,10 @@
  * Represents a 2d integer-based vector. This enables this object to represent both
  * a position on the board as well as a direction of the snake, given that vectors
  * represent both a direction and a magnitude.
+ * 
+ * Additional note: This class used to be Coordinate. I changed it to be vector-based so it
+ * would be capable of representing both position and direction, as well as being 
+ * usable in math operations.
  *
  * @author itsung30
  * @version October 11, 2026
