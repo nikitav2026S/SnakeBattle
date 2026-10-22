@@ -2,16 +2,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class GuiGame extends Application {
@@ -21,7 +17,7 @@ public class GuiGame extends Application {
     private static Board board;
     private static boolean gameOver;
     private Label statusView;
-    private GridPane boardView;
+    private GridPane boardViewGridPane;
     
     @Override
     public void start(Stage primaryStage) {
@@ -38,8 +34,8 @@ public class GuiGame extends Application {
     }
 
     private void buildGui(Stage primaryStage) {
-        boardView = new GridPane();
-        boardView.setAlignment(Pos.CENTER);
+        boardViewGridPane = new GridPane();
+        boardViewGridPane.setAlignment(Pos.CENTER);
 
         statusView = new Label();
 
@@ -77,9 +73,9 @@ public class GuiGame extends Application {
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(12));
         root.setTop(statusView);
-        root.setCenter(boardView);
+        root.setCenter(boardViewGridPane);
         root.setBottom(bottom);
-        BorderPane.setAlignment(boardView, Pos.CENTER);
+        BorderPane.setAlignment(boardViewGridPane, Pos.CENTER);
         BorderPane.setAlignment(statusView, Pos.CENTER);
         BorderPane.setMargin(statusView, new Insets(0, 0, 12, 0));
 
@@ -94,30 +90,38 @@ public class GuiGame extends Application {
      * Update the board based on the status of the game.
      */
     private void refreshGui() {
-        String status = "Player 1 score: " + player1.getPoints()
-            + "\nPlayer 2 score: " + player2.getPoints() + "\n";
-        
-        String whichPlayerWonMessage = "";
-        if (player1.getPoints() > player2.getPoints()) {
-            whichPlayerWonMessage = "Player 1 wins.";
-        } else if (player1.getPoints() < player2.getPoints()) {
-            whichPlayerWonMessage = "Player 2 wins.";
-        } else {
-            whichPlayerWonMessage = "Tie";
-        }
+        // 🦃
+
+        // Update the score status label.=========================================
+        String status = "Player 1 score: " + player1.getPoints() + "\nPlayer 2 score: " + player2.getPoints() + "\n";
+        String whichPlayerWonMessage = "?";
 
         if (gameOver) {
+            if (player1.getPoints() > player2.getPoints()) {
+                whichPlayerWonMessage = "Player 1 wins.";
+            } else if (player1.getPoints() < player2.getPoints()) {
+                whichPlayerWonMessage = "Player 2 wins.";
+            } else {
+                whichPlayerWonMessage = "Tie";
+            }
+
             status += "You hit something! Game over.\n" + whichPlayerWonMessage;
         }
-        else if (gameOver) {
-            status += "Player 1's turn.";
-        }
         else {
-            status += "Player 2's turn.";
+            if (activePlayer.equals(player1)) {
+                status += "Player 1's turn.";
+            } else if (activePlayer.equals(player2)) {
+                status += "Player 2's turn.";
+            }
         }
-        statusView.setText(status);
 
-        BoardRenderer.renderBoardToGridPane(boardView, board);
+        statusView.setText(status);
+        // ======================================================================
+
+        // Update the board ui view.
+        BoardRenderer.renderBoardToGridPane(boardViewGridPane, board);
+
+
     }
 
     private void setupNewGame() {
@@ -130,23 +134,109 @@ public class GuiGame extends Application {
     }
 
     private void play(Vector2 direction) {
+        if (gameOver) {
+            return;
+        }
+
+        if (direction.equals(Vector2.UP)) {
+            while (activePlayer.getDirection() != Vector2.UP) {
+                activePlayer.turnLeft();
+            }
+            activePlayer.move(1);
+            if (isGameOver()) {
+                gameOver = true;
+            } else {
+                consumePickedUpItems();
+            }
+        } else if (direction.equals(Vector2.DOWN)) {
+            while (activePlayer.getDirection() != Vector2.DOWN) {
+                activePlayer.turnLeft();
+            }
+            activePlayer.move(1);
+            if (isGameOver()) {
+                gameOver = true;
+            } else {
+                consumePickedUpItems();
+            }
+        } else if (direction.equals(Vector2.LEFT)) {
+            while (activePlayer.getDirection() != Vector2.LEFT) {
+                activePlayer.turnLeft();
+            }
+            activePlayer.move(1);
+            if (isGameOver()) {
+                gameOver = true;
+            } else {
+                consumePickedUpItems();
+            }
+        } else if (direction.equals(Vector2.RIGHT)) {
+            while (activePlayer.getDirection() != Vector2.RIGHT) {
+                activePlayer.turnLeft();
+            }
+            activePlayer.move(1);
+            if (isGameOver()) {
+                gameOver = true;
+            } else {
+                consumePickedUpItems();
+            }
+        }
+
+        swapTurns();
+    }
+
+    private boolean isGameOver() {
+        boolean passedBoundsCheck = true;
+        boolean passedPlayerColliderCheck = true;
+        Snake otherSnake = (activePlayer == player1) ? player2 : player1;
+
+        // First check bounds, then player to player collisions.
+        if (!board.pointWithinBounds(activePlayer.getHead())) {
+            passedBoundsCheck = false;
+        }
+
+        // Now check if active player's head is in any of other player's segments.
+        if (otherSnake.contains(activePlayer.getHead())) {
+            passedPlayerColliderCheck = false;
+        }
+
+        return !(passedBoundsCheck && passedPlayerColliderCheck);
+    }
+
+    private void swapTurns() {
+        activePlayer = (activePlayer == player1) ? player2 : player1;
+
+    }
+
+    private void consumePickedUpItems() {
+        LinkedChain<Item> items = board.getItems();
+        for (int i = 0; i < items.size() ; i++) {
+            Item current = items.get(i);
+
+            if (activePlayer.getHead().equals(current.getPosition())) {
+                items.remove(current);
+                activePlayer.addPoints(current.getPoints());
+            }
+        }
     }
 
     //#region EVENT HANDLERS
     private void handleUp(ActionEvent event) {
         play(Vector2.UP);
+        refreshGui();
     }
 
     private void handleDown(ActionEvent event) {
         play(Vector2.DOWN);
+        refreshGui();
     }
 
     private void handleLeft(ActionEvent event) {
         play(Vector2.LEFT);
+        refreshGui();
     }
 
     private void handleRight(ActionEvent event) {
         play(Vector2.RIGHT);
+        refreshGui();
     }
 
     private void handlePlayAgain(ActionEvent event) {
