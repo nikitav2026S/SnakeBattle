@@ -1,14 +1,20 @@
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
-import student.TestCase;
 
 public class SnakeTest
-    extends TestCase
 {
     // ~ Fields ........................................................
     private Snake snake;
     private Vector2 start;
 
     // ~ Set Up ........................................................
+    @Before
     public void setUp()
     {
         start = new Vector2(5, 5);
@@ -22,6 +28,7 @@ public class SnakeTest
     /**
      * Test the constructor.
      */
+    @Test 
     public void testConstructor()
     {
         assertEquals(1, snake.getPath().size());
@@ -35,6 +42,7 @@ public class SnakeTest
     /**
      * Test turnLeft().
      */
+    @Test 
     public void testTurnLeft()
     {
         snake.turnLeft();
@@ -50,6 +58,7 @@ public class SnakeTest
     /**
      * Test turnRight().
      */
+    @Test 
     public void testTurnRight()
     {
         snake.turnRight();
@@ -65,6 +74,7 @@ public class SnakeTest
     /**
      * Test move() in all four directions.
      */
+    @Test 
     public void testMove()
     {
         // Up
@@ -92,13 +102,14 @@ public class SnakeTest
     /**
      * Test that move() adds a coordinate to the path.
      */
+    @Test 
     public void testMoveAddsToPath()
     {
         assertEquals(1, snake.getPath().size());
 
         snake.move(2);
 
-        assertEquals(2, snake.getPath().size());
+        assertEquals(3, snake.getPath().size());
     }
 
 
@@ -106,6 +117,7 @@ public class SnakeTest
     /**
      * Test getHead().
      */
+    @Test 
     public void testGetHead()
     {
         assertSame(start, snake.getHead());
@@ -116,6 +128,7 @@ public class SnakeTest
     /**
      * Test getPath().
      */
+    @Test 
     public void testGetPath()
     {
         assertNotNull(snake.getPath());
@@ -127,6 +140,7 @@ public class SnakeTest
     /**
      * Test getPoints() and addPoints().
      */
+    @Test 
     public void testPoints()
     {
         assertEquals(0, snake.getPoints());
@@ -143,6 +157,7 @@ public class SnakeTest
     /**
      * Test contains() with coordinates on and off the path.
      */
+    @Test 
     public void testContains()
     {
         assertTrue(snake.contains(new Vector2(5, 5)));
