@@ -6,13 +6,13 @@ public class SnakeTest
 {
     // ~ Fields ........................................................
     private Snake snake;
-    private Coordinate start;
+    private Vector2 start;
 
     // ~ Set Up ........................................................
     public void setUp()
     {
-        start = new Coordinate(5, 5);
-        snake = new Snake(start, 0);
+        start = new Vector2(5, 5);
+        snake = new Snake(start, Vector2.UP);
     }
 
     // ~ Test Methods ..................................................
@@ -27,7 +27,7 @@ public class SnakeTest
         assertEquals(1, snake.getPath().size());
         assertEquals(start, snake.getHead());
         assertEquals(0, snake.getPoints());
-        assertEquals(0, snake.getDirection());
+        assertEquals(Vector2.UP, snake.getDirection());
     }
 
 
@@ -38,11 +38,11 @@ public class SnakeTest
     public void testTurnLeft()
     {
         snake.turnLeft();
-        assertEquals(3, snake.getDirection());
+        assertEquals(Vector2.LEFT, snake.getDirection());
 
-        snake = new Snake(new Coordinate(5, 5), 2);
+        snake = new Snake(new Vector2(5, 5), Vector2.DOWN);
         snake.turnLeft();
-        assertEquals(1, snake.getDirection());
+        assertEquals(Vector2.RIGHT, snake.getDirection());
     }
 
 
@@ -53,11 +53,11 @@ public class SnakeTest
     public void testTurnRight()
     {
         snake.turnRight();
-        assertEquals(1, snake.getDirection());
+        assertEquals(Vector2.RIGHT, snake.getDirection());
 
-        snake = new Snake(new Coordinate(5, 5), 3);
+        snake = new Snake(new Vector2(5, 5), Vector2.LEFT);
         snake.turnRight();
-        assertEquals(0, snake.getDirection());
+        assertEquals(Vector2.UP, snake.getDirection());
     }
 
 
@@ -69,22 +69,22 @@ public class SnakeTest
     {
         // Up
         snake.move(3);
-        assertEquals(new Coordinate(5, 2), snake.getHead());
+        assertEquals(new Vector2(5, 2), snake.getHead());
 
         // Right
-        snake = new Snake(new Coordinate(5, 5), 1);
+        snake = new Snake(new Vector2(5, 5), Vector2.RIGHT);
         snake.move(3);
-        assertEquals(new Coordinate(8, 5), snake.getHead());
+        assertEquals(new Vector2(8, 5), snake.getHead());
 
         // Down
-        snake = new Snake(new Coordinate(5, 5), 2);
+        snake = new Snake(new Vector2(5, 5), Vector2.DOWN);
         snake.move(3);
-        assertEquals(new Coordinate(5, 8), snake.getHead());
+        assertEquals(new Vector2(5, 8), snake.getHead());
 
         // Left
-        snake = new Snake(new Coordinate(5, 5), 3);
+        snake = new Snake(new Vector2(5, 5), Vector2.LEFT);
         snake.move(3);
-        assertEquals(new Coordinate(2, 5), snake.getHead());
+        assertEquals(new Vector2(2, 5), snake.getHead());
     }
 
 
@@ -145,12 +145,12 @@ public class SnakeTest
      */
     public void testContains()
     {
-        assertTrue(snake.contains(new Coordinate(5, 5)));
-        assertFalse(snake.contains(new Coordinate(9, 9)));
+        assertTrue(snake.contains(new Vector2(5, 5)));
+        assertFalse(snake.contains(new Vector2(9, 9)));
         assertFalse(snake.contains(null));
 
         snake.move(3);
 
-        assertTrue(snake.contains(new Coordinate(5, 2)));
+        assertTrue(snake.contains(new Vector2(5, 2)));
     }
 }
