@@ -31,6 +31,20 @@ public class Item
         this.points = points;
     }
 
+    public String getIcon() {
+        switch (points) {
+            case 1:
+                return "🍇";
+            case 2:
+                return "🍎";
+            case 3:
+                return "🐣";
+            default:
+                // Fallback case: return a turkey.
+                return "🦃";
+        }
+    }
+
     /**
      * Returns the position of this item.
      *

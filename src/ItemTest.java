@@ -62,4 +62,15 @@ public class ItemTest {
     public void testGetPosition() {
         assertSame(position, item.getPosition());
     }
+
+    /**
+     * getIcon returns an emoji based on the item's point value.
+     */
+    @Test
+    public void testGetIcon() {
+        assertEquals("🍇", new Item(position, 1).getIcon());
+        assertEquals("🍎", new Item(position, 2).getIcon());
+        assertEquals("🐣", item.getIcon());
+        assertEquals("🦃", new Item(position, 4).getIcon());
+    }
 }

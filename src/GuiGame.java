@@ -7,7 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 
@@ -20,6 +23,9 @@ import javafx.stage.Stage;
  * Run {@link #main(String[])} or {@code GuiGame.bat}. Game setup belongs in
  * {@link #start(Stage)}, not {@code main}, because {@link #launch(String...)}
  * does not return until the window is closed.
+ * 
+ * @author Isaac Tsung
+ * @version 10/21/2026
  */
 public class GuiGame extends Application {
     private static Snake player1;
@@ -44,6 +50,7 @@ public class GuiGame extends Application {
         launch(args);
     }
 
+    //#region GUI LAYOUT
     /**
      * Initial UI setup; includes adding buttons, windows, and creating and
      * showing the window.
@@ -56,6 +63,22 @@ public class GuiGame extends Application {
         boardViewGridPane.setAlignment(Pos.CENTER);
 
         statusView = new Label();
+        statusView.setAlignment(Pos.CENTER);
+        statusView.setTextAlignment(TextAlignment.CENTER);
+
+        Label legendView = new Label("🍇 = 1\n🍎 = 2\n🐣 = 3\n🦃 = 4+");
+        legendView.setFont(Font.font("Segoe UI Emoji", 14));
+        legendView.setPadding(new Insets(6, 10, 6, 10));
+        legendView.setStyle(
+            "-fx-border-color: #666666;"
+            + "-fx-border-width: 1.5;"
+            + "-fx-border-radius: 10;"
+            + "-fx-background-radius: 10;"
+        );
+
+        StackPane top = new StackPane(statusView, legendView);
+        StackPane.setAlignment(statusView, Pos.CENTER);
+        StackPane.setAlignment(legendView, Pos.CENTER_RIGHT);
 
         Button upBtn = new Button();
         upBtn.setText("↑");
@@ -90,19 +113,20 @@ public class GuiGame extends Application {
 
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(12));
-        root.setTop(statusView);
+        root.setTop(top);
         root.setCenter(boardViewGridPane);
         root.setBottom(bottom);
         BorderPane.setAlignment(boardViewGridPane, Pos.CENTER);
-        BorderPane.setAlignment(statusView, Pos.CENTER);
-        BorderPane.setMargin(statusView, new Insets(0, 0, 12, 0));
+        BorderPane.setAlignment(top, Pos.CENTER);
+        BorderPane.setMargin(top, new Insets(0, 0, 12, 0));
 
-        Scene scene = new Scene(root, 360, 480);
+        Scene scene = new Scene(root, 420, 480);
 
-        primaryStage.setTitle("Snake Battle");
+        primaryStage.setTitle("Snake Battle: GUI edition");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    //#endregion
 
     /**
      * Update the board based on the status of the game. This must be called

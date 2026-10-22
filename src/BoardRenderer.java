@@ -58,7 +58,7 @@ public class BoardRenderer {
 
             Label label = cells[y][x];
             
-            label.setText("🍎");
+            label.setText(item.getIcon());
         }
 
         // Finally we place the snakes.
